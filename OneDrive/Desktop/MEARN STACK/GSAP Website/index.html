@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VogueVista - Fashion Magazine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+
+  <style>
+    /* Custom colors */
+    :root {
+      --primary-dark: #1F2937;
+      --accent-pink: #E75480;
+      --secondary-neutral: #F9FAFB;
+      --text-light: #F3F4F6;
+      --gold-accent: #C9A66B;
+    }
+
+    /* Navbar and dropdown styling */
+    nav {
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+    }
+    nav h1 {
+      color: var(--accent-pink);
+    }
+    nav ul li span {
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+    nav ul li span:hover {
+      color: var(--accent-pink);
+    }
+    .dropdown-menu {
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+      border-radius: 12px;
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      position: absolute;
+      left: 0;
+      margin-top: 0.5rem;
+      width: max-content;
+      min-width: 160px;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      box-shadow: none; /* simplified */
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dropdown-menu li {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .dropdown-menu li:hover {
+      background-color: var(--accent-pink);
+      color: var(--secondary-neutral);
+    }
+
+    button {
+      background-color: var(--accent-pink);
+      color: var(--secondary-neutral);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: var(--gold-accent);
+    }
+
+    section.bg-gray-100 {
+      background-color: var(--secondary-neutral);
+    }
+
+    h2, h3 {
+      color: var(--accent-pink);
+    }
+
+    footer {
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+    }
+    footer h3 {
+      color: var(--accent-pink);
+    }
+    footer ul li:hover {
+      color: var(--gold-accent);
+      cursor: pointer;
+    }
+
+    /* Overlay container - subtle gold tint on hover */
+    .overlay-container::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      transition: top 0.4s ease;
+      border-radius: inherit;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .overlay-container:hover::after {
+      top: 0;
+      background: rgba(201, 166, 107, 0.15);
+    }
+
+    /* Smooth Zoom Hover for Featured Photos */
+    .smooth-zoom {
+      overflow: hidden;
+      border-radius: 12px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .smooth-zoom img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .smooth-zoom:hover img {
+      transform: scale(1.08);
+    }
+    .smooth-zoom:hover {
+      box-shadow: 0 20px 40px rgba(201, 166, 107, 0.4);
+    }
+  </style>
+</head>
+
+<body class="bg-secondary-neutral text-primary-dark font-sans">
+
+  <!-- NAVBAR WITH DROPDOWNS -->
+  <nav class="flex justify-between items-center px-8 py-4 fixed top-0 w-full z-50">
+    <div class="flex items-center space-x-3">
+      <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="VogueVista Logo" class="w-8 h-8" />
+      <h1 class="text-3xl font-bold tracking-wide">VogueVista</h1>
+    </div>
+
+    <ul class="flex space-x-8 text-lg font-medium">
+
+      <!-- HOME -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Home</span>
+        <ul class="dropdown-menu">
+          <li>Latest</li>
+          <li>Popular</li>
+          <li>Featured</li>
+        </ul>
+      </li>
+
+      <!-- TRENDS -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Trends</span>
+        <ul class="dropdown-menu">
+          <li>Street Style</li>
+          <li>Seasonal Trends</li>
+          <li>Editor's Picks</li>
+        </ul>
+      </li>
+
+      <!-- FASHION WEEK -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Fashion Week</span>
+        <ul class="dropdown-menu">
+          <li>Paris</li>
+          <li>Milan</li>
+          <li>New York</li>
+          <li>London</li>
+        </ul>
+      </li>
+
+      <!-- BEAUTY -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Beauty</span>
+        <ul class="dropdown-menu">
+          <li>Skincare</li>
+          <li>Makeup</li>
+          <li>Hair</li>
+        </ul>
+      </li>
+
+      <!-- LIFESTYLE -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Lifestyle</span>
+        <ul class="dropdown-menu">
+          <li>Travel</li>
+          <li>Culture</li>
+          <li>Wellness</li>
+        </ul>
+      </li>
+
+      <!-- GALLERY -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Gallery</span>
+        <ul class="dropdown-menu">
+          <li>Runway</li>
+          <li>Editorial</li>
+          <li>Street</li>
+        </ul>
+      </li>
+
+      <!-- CONTACT -->
+      <li class="relative dropdown cursor-pointer">
+        <span class="hover:text-accent-pink">Contact</span>
+        <ul class="dropdown-menu">
+          <li>Email</li>
+          <li>Collaborate</li>
+          <li>Submit Work</li>
+        </ul>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="relative h-screen w-full flex items-center justify-center mt-20">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1684323750753-ddeb888f825a"
+         class="w-full h-full object-cover absolute top-0 left-0 brightness-75" />
+
+    <div class="relative z-10 text-white text-center max-w-3xl px-6">
+      <h2 class="text-5xl font-extrabold drop-shadow-lg">Where Fashion Meets Art</h2>
+      <p class="text-xl mt-4 drop-shadow-lg">
+        Discover global style, runway highlights, beauty secrets, lifestyle inspirations, and more.
+      </p>
+      <button class="mt-6 px-6 py-3 rounded-full text-lg font-semibold shadow-lg">
+        Explore Stories
+      </button>
+    </div>
+  </section>
+
+  <!-- FEATURED EDITIONS -->
+  <section class="py-16 px-10 bg-secondary-neutral">
+    <h2 class="text-4xl font-bold text-center mb-10">Featured Editions</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="smooth-zoom shadow-lg rounded-xl">
+        <img src="https://images.unsplash.com/photo-1681554085454-93da5a5663f6" alt="Featured 1" />
+      </div>
+      <div class="smooth-zoom shadow-lg rounded-xl">
+        <img src="https://images.unsplash.com/photo-1561357747-a5ebd644c2d6" alt="Featured 2" />
+      </div>
+      <div class="smooth-zoom shadow-lg rounded-xl">
+        <img src="https://images.unsplash.com/photo-1570833181606-e694d0560b0c" alt="Featured 3" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CELEBRITY STYLE -->
+  <section class="py-16 px-10">
+    <h2 class="text-4xl font-bold text-center mb-12">Celebrity Style Spotlight</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="overlay-container relative rounded-xl shadow-xl overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1690148887529-7b5cfe58c3b0" class="w-full rounded-xl" alt="Celebrity Style" />
+      </div>
+
+      <div>
+        <h3 class="text-3xl font-semibold mb-4">Red Carpet Royalty</h3>
+        <p class="text-xl leading-relaxed">
+         From Hollywood premieres to Paris Fashion Week, the red carpet has evolved into a global stage of artistry and expression. Explore couture gowns, luxury fashion, and iconic silhouettes that inspire the world. Celebrities and designers collaborate to create unforgettable moments that define trends for the seasons ahead. Every detail, from fabric choice to accessories, tells a story of creativity and craftsmanship. 
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="py-16 px-10 bg-secondary-neutral">
+    <h2 class="text-4xl font-bold text-center mb-10">Runway & Editorial Gallery</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="overlay-container relative rounded-lg shadow-md overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1597253702831-d6a6d0be4f21?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTZ8fGZhc2hpb258ZW58MHx8MHx8fDA%3D" alt="Gallery 1" />
+      </div>
+      <div class="overlay-container relative rounded-lg shadow-md overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1625204614387-6509254d5b02?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fGZhc2hpb258ZW58MHx8MHx8fDA%3D" alt="Gallery 2" />
+      </div>
+      <div class="overlay-container relative rounded-lg shadow-md overflow-hidden">
+        <img src="https://plus.unsplash.com/premium_photo-1708275308971-067227924b03?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg0fHxmYXNoaW9ufGVufDB8fDB8fHww" alt="Gallery 3" />
+      </div>
+      <div class="overlay-container relative rounded-lg shadow-md overflow-hidden">
+        <img src="https://images.unsplash.com/flagged/photo-1557691844-0fc874166691?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg3fHxmYXNoaW9ufGVufDB8fDB8fHww" alt="Gallery 4" />
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE VIDEO -->
+  <section class="py-16 px-10">
+    <h2 class="text-4xl font-bold text-center mb-10">Fashion Week Highlights</h2>
+    <div class="flex justify-center">
+      <iframe 
+        class="rounded-xl shadow-xl w-full md:w-4/5 lg:w-3/4 h-[500px]"
+        src="https://www.youtube.com/embed/ZukboSBHZJk?si=3U9J-frRXT65sR5b"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ACCORDION -->
+  <section class="px-10 py-16 bg-white">
+    <h2 class="text-4xl font-bold text-center mb-10 text-primary-dark">Frequently Asked Questions</h2>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+
+      <details class="border border-gray-300 rounded-lg px-6 py-4 cursor-pointer">
+        <summary class="text-xl font-semibold">What is VogueVista?</summary>
+        <p class="mt-2 text-lg text-gray-700">VogueVista is a global fashion & lifestyle digital magazine.</p>
+      </details>
+
+      <details class="border border-gray-300 rounded-lg px-6 py-4 cursor-pointer">
+        <summary class="text-xl font-semibold">How often are new editions released?</summary>
+        <p class="mt-2 text-lg text-gray-700">Fresh stories, galleries & trends published every week.</p>
+      </details>
+
+      <details class="border border-gray-300 rounded-lg px-6 py-4 cursor-pointer">
+        <summary class="text-xl font-semibold">Can I submit my work?</summary>
+        <p class="mt-2 text-lg text-gray-700">Yes, designers and photographers can submit portfolios.</p>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-16 px-10 mt-10">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <h3 class="text-xl font-bold mb-4">VogueVista</h3>
+        <p>Your daily dose of global fashion, trends, beauty, and lifestyle inspiration.</p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Sections</h3>
+        <ul class="space-y-2">
+          <li class="hover:text-gold-accent cursor-pointer">Trends</li>
+          <li class="hover:text-gold-accent cursor-pointer">Beauty</li>
+          <li class="hover:text-gold-accent cursor-pointer">Lifestyle</li>
+          <li class="hover:text-gold-accent cursor-pointer">Fashion Week</li>
+          <li class="hover:text-gold-accent cursor-pointer">Interviews</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li class="hover:text-gold-accent cursor-pointer">About Us</li>
+          <li class="hover:text-gold-accent cursor-pointer">Advertise</li>
+          <li class="hover:text-gold-accent cursor-pointer">Privacy Policy</li>
+          <li class="hover:text-gold-accent cursor-pointer">Terms & Conditions</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Connect</h3>
+        <ul class="space-y-2">
+          <li class="hover:text-gold-accent cursor-pointer">Instagram</li>
+          <li class="hover:text-gold-accent cursor-pointer">Pinterest</li>
+          <li class="hover:text-gold-accent cursor-pointer">YouTube</li>
+          <li>Email: contact@voguevista.com</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+
