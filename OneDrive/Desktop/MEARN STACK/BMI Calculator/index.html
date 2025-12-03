@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleek BMI Calculator</title>
+  
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>BMI Calculator</h1>
+    <h3>Body Mass Index for Adults</h3>
+
+    <div class="bmi-wrapper">
+
+        <!-- GAUGE -->
+        <div class="gauge-box">
+             <img width="450px"  src="https://www.emeraldlaser.com/wp-content/uploads/2022/11/body-mass-index.jpg" alt="">
+            <div class="needle" id="needle"></div>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-box">
+
+            <label for="gender">Gender</label>
+            <div class="gender-box" id="gender">
+                <label><input type="radio" name="gender" value="male" checked> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+            </div>
+
+            <label for="age">Age (2+ years)</label>
+            <input type="number" id="age" placeholder="Your age" min="2" value="30">
+
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" placeholder="Your weight in kg" min="1" value="75">
+
+            <label for="height">Height (cm)</label>
+            <input type="number" id="height" placeholder="Your height in cm" min="10" value="175">
+
+            <button class="calculate" onclick="calculateBMI()">Calculate</button>
+            <button class="reset" onclick="resetBMI()">Reset</button>
+
+        </div>
+
+    </div>
+
+    <div class="result-box">
+        Your BMI is: <span id="bmi-value">--</span>
+        <span id="bmi-status">Enter your details and click Calculate</span>
+    </div>
+
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>
